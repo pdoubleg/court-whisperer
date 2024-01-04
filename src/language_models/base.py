@@ -1,0 +1,476 @@
+import ast
+import asyncio
+import json
+import logging
+from abc import ABC, abstractmethod
+from enum import Enum
+from typing import Any, Dict, List, Optional, Tuple, Type, Union
+
+import aiohttp
+from pydantic import BaseModel, BaseSettings
+
+from src.types import Document
+from src.parsing.json import top_level_json_field
+from src.prompts.dialog import collate_chat_history
+from src.prompts.templates import (
+    EXTRACTION_PROMPT_GPT4,
+    SUMMARY_ANSWER_PROMPT_GPT4,
+)
+
+logger = logging.getLogger(__name__)
+
+
+class LLMConfig(BaseSettings):
+    type: str = "openai"
+    timeout: int = 20  # timeout for API requests
+    chat_model: Optional[str] = None
+    completion_model: Optional[str] = None
+    temperature: float = 0.0
+    context_length: Optional[Dict[str, int]] = None
+    max_output_tokens: int = 1024  # generate at most this many tokens
+    # if input length + max_output_tokens > context length of model,
+    # we will try shortening requested output
+    min_output_tokens: int = 64
+    # Dict of model -> (input/prompt cost, output/completion cost)
+    cost_per_1k_tokens: Optional[Dict[str, Tuple[float, float]]] = None
+
+
+class LLMFunctionCall(BaseModel):
+    """
+    Structure of LLM response indicate it "wants" to call a function.
+    Modeled after OpenAI spec for `function_call` field in ChatCompletion API.
+    """
+
+    name: str  # name of function to call
+    arguments: Optional[Dict[str, Any]] = None
+
+    @staticmethod
+    def from_dict(message: Dict[str, Any]) -> "LLMFunctionCall":
+        """
+        Initialize from dictionary.
+        Args:
+            d: dictionary containing fields to initialize
+        """
+        fun_call = LLMFunctionCall(name=message["name"])
+        fun_args_str = message["arguments"]
+        # sometimes may be malformed with invalid indents,
+        # so we try to be safe by removing newlines.
+        fun_args_str = fun_args_str.replace("\n", "").strip()
+        fun_args = ast.literal_eval(fun_args_str)
+        fun_call.arguments = fun_args
+
+        return fun_call
+
+    def __str__(self) -> str:
+        return "FUNC: " + json.dumps(self.dict(), indent=2)
+    
+    
+class Role(str, Enum):
+    USER = "user"
+    SYSTEM = "system"
+    ASSISTANT = "assistant"
+    FUNCTION = "function"
+
+
+class LLMFunctionSpec(BaseModel):
+    """
+    Description of a function available for the LLM to use.
+    To be used when calling the LLM `chat()` method with the `functions` parameter.
+    Modeled after OpenAI spec for `functions` fields in ChatCompletion API.
+    """
+
+    name: str
+    description: str
+    parameters: Dict[str, Any]
+
+
+class LLMTokenUsage(BaseModel):
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    cost: float = 0.0
+    calls: int = 0  # how many API calls
+
+    def reset(self) -> None:
+        self.prompt_tokens = 0
+        self.completion_tokens = 0
+        self.cost = 0.0
+        self.calls = 0
+
+    def __str__(self) -> str:
+        return (
+            f"Tokens = "
+            f"(prompt {self.prompt_tokens}, completion {self.completion_tokens}), "
+            f"Cost={self.cost}, Calls={self.calls}"
+        )
+
+    @property
+    def total_tokens(self) -> int:
+        return self.prompt_tokens + self.completion_tokens
+
+
+class LLMMessage(BaseModel):
+    """
+    Class representing message sent to, or received from, LLM.
+    """
+    role: Role
+    name: Optional[str] = None
+    content: str
+    function_call: Optional[LLMFunctionCall] = None
+
+    def api_dict(self) -> Dict[str, Any]:
+        """
+        Convert to dictionary for API request.
+        Returns:
+            dict: dictionary representation of LLM message
+        """
+        d = self.dict()
+        # drop None values since API doesn't accept them
+        dict_no_none = {k: v for k, v in d.items() if v is not None}
+        if "name" in dict_no_none and dict_no_none["name"] == "":
+            # OpenAI API does not like empty name
+            del dict_no_none["name"]
+        if "function_call" in dict_no_none:
+            # arguments must be a string
+            if "arguments" in dict_no_none["function_call"]:
+                dict_no_none["function_call"]["arguments"] = json.dumps(
+                    dict_no_none["function_call"]["arguments"]
+                )
+        dict_no_none.pop("tool_id", None)
+        return dict_no_none
+
+    def __str__(self) -> str:
+        if self.function_call is not None:
+            content = "FUNC: " + json.dumps(self.function_call)
+        else:
+            content = self.content
+        name_str = f" ({self.name})" if self.name else ""
+        return f"{self.role} {name_str}: {content}"
+
+
+class LLMResponse(BaseModel):
+    """
+    Class representing response from LLM.
+    """
+    message: str
+    function_call: Optional[LLMFunctionCall] = None
+    usage: Optional[LLMTokenUsage]
+
+    def to_LLMMessage(self) -> LLMMessage:
+        content = self.message
+        role = Role.ASSISTANT if self.function_call is None else Role.FUNCTION
+        name = None if self.function_call is None else self.function_call.name
+        return LLMMessage(
+            role=role,
+            content=content,
+            name=name,
+            function_call=self.function_call,
+        )
+
+
+# Define an abstract base class for language models
+class LanguageModel(ABC):
+    """
+    Abstract base class for language models.
+    """
+
+    # usage cost by model, accumulates here
+    usage_cost_dict: Dict[str, LLMTokenUsage] = {}
+
+    def __init__(self, config: LLMConfig = LLMConfig()):
+        self.config = config
+
+    @staticmethod
+    def create(config: Optional[LLMConfig]) -> Optional["LanguageModel"]:
+        """
+        Create a language model.
+        Args:
+            config: configuration for language model
+        Returns: instance of language model
+        """
+        if type(config) is LLMConfig:
+            raise ValueError(
+                """
+                Cannot create a Language Model object from LLMConfig. 
+                Please specify a specific subclass of LLMConfig e.g., 
+                OpenAIGPTConfig. If you are creating a ChatAgent from 
+                a ChatAgentConfig, please specify the `llm` field of this config
+                as a specific subclass of LLMConfig, e.g., OpenAIGPTConfig.
+                """
+            )
+        #from src.language_models.azure_openai import AzureGPT
+        from src.language_models.openai_gpt import OpenAIGPT
+
+        # if config is None or config.type is None:
+        #     return None
+
+        # openai: Union[Type[AzureGPT], Type[OpenAIGPT]]
+
+        # if config.type == "azure":
+        #     openai = AzureGPT
+        # else:
+        #     openai = OpenAIGPT
+        cls = dict(
+            openai=OpenAIGPT,
+        ).get(config.type, openai)
+        return cls(config)  # type: ignore
+
+    @staticmethod
+    def user_assistant_pairs(lst: List[str]) -> List[Tuple[str, str]]:
+        """
+        Given an even-length sequence of strings, split into a sequence of pairs
+
+        Args:
+            lst (List[str]): sequence of strings
+
+        Returns:
+            List[Tuple[str,str]]: sequence of pairs of strings
+        """
+        evens = lst[::2]
+        odds = lst[1::2]
+        return list(zip(evens, odds))
+
+    @staticmethod
+    def get_chat_history_components(
+        messages: List[LLMMessage],
+    ) -> Tuple[str, List[Tuple[str, str]], str]:
+        """
+        From the chat history, extract system prompt, user-assistant turns, and
+        final user msg.
+
+        Args:
+            messages (List[LLMMessage]): List of messages in the chat history
+
+        Returns:
+            Tuple[str, List[Tuple[str,str]], str]:
+                system prompt, user-assistant turns, final user msg
+
+        """
+        # Handle various degenerate cases
+        messages = [m for m in messages]  # copy
+        DUMMY_SYS_PROMPT = "You are a helpful assistant."
+        DUMMY_USER_PROMPT = "Follow the instructions above."
+        if len(messages) == 0 or messages[0].role != Role.SYSTEM:
+            logger.warning("No system msg, creating dummy system prompt")
+            messages.insert(0, LLMMessage(content=DUMMY_SYS_PROMPT, role=Role.SYSTEM))
+        system_prompt = messages[0].content
+
+        # now we have messages = [Sys,...]
+        if len(messages) == 1:
+            logger.warning(
+                "Got only system message in chat history, creating dummy user prompt"
+            )
+            messages.append(LLMMessage(content=DUMMY_USER_PROMPT, role=Role.USER))
+
+        # now we have messages = [Sys, msg, ...]
+
+        if messages[1].role != Role.USER:
+            messages.insert(1, LLMMessage(content=DUMMY_USER_PROMPT, role=Role.USER))
+
+        # now we have messages = [Sys, user, ...]
+        if messages[-1].role != Role.USER:
+            logger.warning(
+                "Last message in chat history is not a user message,"
+                " creating dummy user prompt"
+            )
+            messages.append(LLMMessage(content=DUMMY_USER_PROMPT, role=Role.USER))
+
+        # now we have messages = [Sys, user, ..., user]
+        # so we omit the first and last elements and make pairs of user-asst messages
+        conversation = [m.content for m in messages[1:-1]]
+        user_prompt = messages[-1].content
+        pairs = LanguageModel.user_assistant_pairs(conversation)
+        return system_prompt, pairs, user_prompt
+
+    @abstractmethod
+    def generate(self, prompt: str, max_tokens: int = 200) -> LLMResponse:
+        pass
+
+    @abstractmethod
+    async def agenerate(self, prompt: str, max_tokens: int = 200) -> LLMResponse:
+        pass
+
+    @abstractmethod
+    def chat(
+        self,
+        messages: Union[str, List[LLMMessage]],
+        max_tokens: int = 200,
+        functions: Optional[List[LLMFunctionSpec]] = None,
+        function_call: str | Dict[str, str] = "auto",
+    ) -> LLMResponse:
+        pass
+
+    def __call__(self, prompt: str, max_tokens: int) -> LLMResponse:
+        return self.generate(prompt, max_tokens)
+
+    def chat_context_length(self) -> int:
+        return self.config.chat_context_length
+
+    def completion_context_length(self) -> int:
+        return self.config.completion_context_length
+
+    def chat_cost(self) -> Tuple[float, float]:
+        return self.config.cost_per_1k_tokens
+
+    def reset_usage_cost(self) -> None:
+        for mdl in self.config.chat_model:
+            if mdl is None:
+                return
+            if mdl not in self.usage_cost_dict:
+                self.usage_cost_dict[mdl] = LLMTokenUsage()
+            counter = self.usage_cost_dict[mdl]
+            counter.reset()
+
+    def update_usage_cost(
+        self, prompts: int, completions: int, cost: float
+    ) -> None:
+        """
+        Update usage cost for this LLM.
+        Args:
+            chat (bool): whether to update for chat or completion model
+            prompts (int): number of tokens used for prompts
+            completions (int): number of tokens used for completions
+            cost (float): total token cost in USD
+        """
+        mdl = self.config.chat_model
+        if mdl is None:
+            return
+        if mdl not in self.usage_cost_dict:
+            self.usage_cost_dict[mdl] = LLMTokenUsage()
+        counter = self.usage_cost_dict[mdl]
+        counter.prompt_tokens += prompts
+        counter.completion_tokens += completions
+        counter.cost += cost
+        counter.calls += 1
+
+    @classmethod
+    def usage_cost_summary(cls) -> str:
+        s = ""
+        for model, counter in cls.usage_cost_dict.items():
+            s += f"{model}: {counter}\n"
+        return s
+
+    def followup_to_standalone(
+        self, chat_history: List[Tuple[str, str]], question: str
+    ) -> str:
+        """
+        Given a chat history and a question, convert it to a standalone question.
+        Args:
+            chat_history: list of tuples of (question, answer)
+            query: follow-up question
+
+        Returns: standalone version of the question
+        """
+        history = collate_chat_history(chat_history)
+
+        prompt = f"""
+        Given the conversationn below, and a follow-up question, rephrase the follow-up 
+        question as a standalone question.
+        
+        Chat history: {history}
+        Follow-up question: {question} 
+        """.strip()
+        show_if_debug(prompt, "FOLLOWUP->STANDALONE-PROMPT= ")
+        standalone = self.generate(prompt=prompt, max_tokens=1024).message.strip()
+        show_if_debug(prompt, "FOLLOWUP->STANDALONE-RESPONSE= ")
+        return standalone
+
+    async def get_verbatim_extract_async(self, question: str, passage: Document) -> str:
+        """
+        Asynchronously, get verbatim extract from passage
+        that is relevant to a question.
+        Asynch allows parallel calls to the LLM API.
+        """
+        async with aiohttp.ClientSession():
+            templatized_prompt = EXTRACTION_PROMPT_GPT4
+            final_prompt = templatized_prompt.format(
+                question=question, content=passage.content
+            )
+            show_if_debug(final_prompt, "EXTRACT-PROMPT= ")
+            final_extract = await self.agenerate(prompt=final_prompt, max_tokens=1024)
+            show_if_debug(final_extract.message.strip(), "EXTRACT-RESPONSE= ")
+        return final_extract.message.strip()
+
+    async def _get_verbatim_extracts(
+        self,
+        question: str,
+        passages: List[Document],
+    ) -> List[Document]:
+        async with aiohttp.ClientSession():
+            verbatim_extracts = await asyncio.gather(
+                *(self.get_verbatim_extract_async(question, P) for P in passages)
+            )
+        metadatas = [P.metadata for P in passages]
+        # return with metadata so we can use it downstream, e.g. to cite sources
+        return [
+            Document(content=e, metadata=m)
+            for e, m in zip(verbatim_extracts, metadatas)
+        ]
+
+    def get_verbatim_extracts(
+        self, question: str, passages: List[Document]
+    ) -> List[Document]:
+        """
+        From each passage, extract verbatim text that is relevant to a question,
+        using concurrent API calls to the LLM.
+        Args:
+            question: question to be answered
+            passages: list of passages from which to extract relevant verbatim text
+            LLM: LanguageModel to use for generating the prompt and extract
+        Returns:
+            list of verbatim extracts from passages that are relevant to question
+        """
+        docs = asyncio.run(self._get_verbatim_extracts(question, passages))
+        return docs
+
+    def get_summary_answer(self, question: str, passages: List[Document]) -> Document:
+        """
+        Given a question and a list of (possibly) doc snippets,
+        generate an answer if possible
+        Args:
+            question: question to answer
+            passages: list of `Document` objects each containing a possibly relevant
+                snippet, and metadata
+        Returns:
+            a `Document` object containing the answer,
+            and metadata containing source citations
+
+        """
+
+        # Define an auxiliary function to transform the list of
+        # passages into a single string
+        def stringify_passages(passages: List[Document]) -> str:
+            return "\n".join(
+                [
+                    f"""
+                Extract: {p.content}
+                Source: {p.metadata.source}
+                """
+                    for p in passages
+                ]
+            )
+
+        passages_str = stringify_passages(passages)
+        # Substitute Q and P into the templatized prompt
+
+        final_prompt = SUMMARY_ANSWER_PROMPT_GPT4.format(
+            question=f"Question:{question}", extracts=passages_str
+        )
+        show_if_debug(final_prompt, "SUMMARIZE_PROMPT= ")
+        # Generate the final verbatim extract based on the final prompt
+        llm_response = self.generate(prompt=final_prompt, max_tokens=1024)
+        final_answer = llm_response.message.strip()
+        show_if_debug(final_answer, "SUMMARIZE_RESPONSE= ")
+        parts = final_answer.split("SOURCE:", maxsplit=1)
+        if len(parts) > 1:
+            content = parts[0].strip()
+            sources = parts[1].strip()
+        else:
+            content = final_answer
+            sources = ""
+        return Document(
+            content=content,
+            metadata={
+                "source": "SOURCE: " + sources,
+            },
+        )
+
