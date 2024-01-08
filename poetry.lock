@@ -726,6 +726,25 @@ typing-extensions = ">=4.5.0"
 uvicorn = {version = ">=0.18.3", extras = ["standard"]}
 
 [[package]]
+name = "citeurl"
+version = "11.2.1"
+description = "an extensible tool to process legal citations in text"
+optional = false
+python-versions = "*"
+files = [
+    {file = "citeurl-11.2.1-py3-none-any.whl", hash = "sha256:2468c760d4177946fc4c43a91959e3e36340147c416a152433f721d839d97a24"},
+    {file = "citeurl-11.2.1.tar.gz", hash = "sha256:8d933e326bcf78225c74e1b0847dadea1ce2ff4610de81f26ffeb3ee905b4ac7"},
+]
+
+[package.dependencies]
+pyyaml = "*"
+
+[package.extras]
+config = ["appdirs"]
+full = ["appdirs", "flask"]
+web = ["flask"]
+
+[[package]]
 name = "click"
 version = "8.1.7"
 description = "Composable command line interface toolkit"
@@ -6146,4 +6165,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "ca6c823739f4a8e44cb14403065be4a27d721806bcb900675e8a2cb5a61bf381"
+content-hash = "b51d966d2307829ef1dceeca05f06c76b1407562766637d6f40d5a2117d33c0a"

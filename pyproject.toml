@@ -37,6 +37,7 @@ faiss-cpu = "^1.7.4"
 sentence-transformers = "^2.2.2"
 docstring-parser = "^0.15"
 datasketch = "^1.6.4"
+citeurl = "^11.2.1"
 
 
 [tool.poetry.dev-dependencies]

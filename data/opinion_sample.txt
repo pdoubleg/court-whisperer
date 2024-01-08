@@ -1,0 +1,833 @@
+         [Cite as Densler v. Durrani, 2024-Ohio-14.]
+
+
+                      IN THE COURT OF APPEALS
+                  FIRST APPELLATE DISTRICT OF OHIO
+                       HAMILTON COUNTY, OHIO
+
+ BETHANY DENSLER, Administrator                        :   APPEAL NO. C-230016
+ of the Estate of Robert Densler,                          TRIAL NO. A-1706561
+
+         Plaintiff-Appellee,                           :
+                                                              O P I N I O N.
+   vs.                                                 :
+
+ ABUBAKAR ATIQ DURRANI, M.D.,                          :
+
+   and                                                 :
+
+ CENTER FOR ADVANCED SPINE                             :
+ TECHNOLOGIES, INC.,
+
+         Defendants-Appellants.                        :
+
+
+
+Civil Appeal From: Hamilton County Court of Common Pleas
+
+Judgment Appealed From Is: Reversed and Cause Remanded
+
+Date of Judgment Entry on Appeal: January 5, 2024
+
+
+Robert A. Winter, Jr., James F. Maus and Benjamin M. Maraan II, for Plaintiff-
+Appellee,
+
+Taft Stettinius & Hollister LLP, Philip D. Williamson, Aaron M. Herzig, Russel S.
+Sayre, Alex Van Dyke, Anna M. Greve, Lindhorst & Dreidame Co., L.P.A., James F.
+Brockman and Paul Vollman, for Defendants-Appellants.
+
+                        OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+ZAYAS, Presiding Judge.
+
+        {¶1}     Defendants-appellants Abubakar Atiq Durrani, M.D., and the Center for
+
+Advanced Spine Technologies, Inc., (“CAST”) (collectively “defendants”) appeal the
+
+judgments of the Hamilton County Court of Common Pleas, which denied their motion
+
+for judgment notwithstanding the verdict and for a new trial and awarded former
+
+plaintiff Robert Densler1 compensatory and punitive damages consistent with the
+
+jury’s verdict in his favor on his fraudulent-misrepresentation claim in the amount of
+
+$162,021.20. In a single assignment of error, defendants assert that the trial court
+
+erred in denying their motion for judgment notwithstanding the verdict and/or for a
+
+new trial. For the following reasons, we sustain the assignment of error, reverse the
+
+trial court’s judgment, and remand the cause for further proceedings consistent with
+
+this opinion and the law.
+
+                       I. Brief Factual and Procedural Background
+
+        {¶2}     The instant malpractice action stems from a spinal surgery performed
+
+by Dr. Durrani on Robert Densler. Mr. Densler was referred to Dr. Durrani by his
+
+primary-care physician in 2012 after conservative treatment attempts for back pain
+
+were unsuccessful. Mr. Densler testified that, at his first visit with Dr. Durrani, x-rays
+
+were completed, and Dr. Durrani put the x-rays “up on that light” and told him that
+
+his back was broken and he had a lower-lumbar fracture. Dr. Durrani then allegedly
+
+told him that he would be paralyzed without surgery.                     Dr. Durrani ultimately
+
+performed the recommended spinal surgery on Mr. Densler that same year.
+
+        {¶3}     Mr. Densler subsequently brought claims against Dr. Durrani relating
+
+to the surgery for negligence, battery, fraudulent misrepresentation, and lack of
+
+
+
+1 Bethany Densler, Administrator of the Estate of Robert Densler, was ultimately substituted as the
+plaintiff in this action in place of Robert Densler on August 29, 2022, by order of the trial court.
+
+                                                      2
+                        OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+informed consent, and against CAST for vicarious liability. After a nine-day trial where
+
+both sides presented extensive expert testimony, as well as other evidence, regarding
+
+all the issues, the jury rendered a verdict in favor of Mr. Densler on the fraudulent-
+
+misrepresentation claim and awarded Mr. Densler $62,021.20 in compensatory
+
+damages for past medical expenses and $100,000 in punitive damages. The verdict
+
+was based on the jury’s finding that Dr. Durrani fraudulently misrepresented the
+
+necessity or medical indication for the surgery. Relative to punitive damages, the jury
+
+found that Dr. Durrani “acted with malice and aggravated or egregious fraud” by
+
+telling Mr. Densler “that he would be paralyzed without the surgery and lose control
+
+of bodily functions.”
+
+       {¶4}   Defendants subsequently moved for judgment notwithstanding the
+
+verdict and/or for a new trial, asserting several grounds of error including, among
+
+others, that the trial court erred in allowing Mr. Densler to pursue a claim for past
+
+medical expenses at trial. The trial court ultimately denied the motion on all grounds,
+
+except to order that the compensatory-damages award for past medical expenses—if
+
+and when paid—be retained by the court “until the issue of what amount of the
+
+$62,021.20 is due to Medicare is resolved.” Defendants now appeal. In a single
+
+assignment of error, defendants argue that the trial court erred in denying their
+
+motion for judgment notwithstanding the verdict and/or for a new trial.
+
+                                 II. Law and Analysis
+
+                    A. Standing to Seek Past Medical Damages
+
+       {¶5}   Defendants argue that Mr. Densler lacked standing to seek past medical
+
+damages at trial because Mr. Densler’s insurer, Medicare, paid the remaining amount
+
+
+
+
+                                               3
+                       OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+owed on Mr. Densler’s medical bills after certain adjustments were made.2 See
+
+generally Robinson v. Bates, 112 Ohio St.3d 17, 2006-Ohio-6362, 857 N.E.2d 1195, ¶
+
+17-18 (distinguishing between the amount originally billed and the amount ultimately
+
+accepted as payment by the medical provider and holding that both are admissible to
+
+prove the reasonableness and necessity of the charges rendered for medical and
+
+hospital care as the jury may decide that the reasonable value of the medical care is
+
+the amount originally billed, the amount the medical provider accepted as payment or
+
+some amount in between). Because defendants present this argument as an issue of
+
+standing, we consider this issue first.
+
+        {¶6}    We recently addressed a similar argument in McCann v. Durrani, 1st
+
+Dist. Hamilton Nos. C-220025 and C-220033, 2023-Ohio-3953. We clarified in
+
+McCann that an injured party does not lose his or her standing to sue merely because
+
+he or she did not suffer certain economic damages. Id. at ¶ 22. This is because, in a
+
+medical-malpractice case, where various alleged economic and noneconomic losses
+
+arise out of the same tortious act, only a single cause of action arises from those
+
+injuries and—regardless of the separate items of damage that may be awarded for such
+
+act—we do not consider a plaintiff’s claim for those various types of damages under
+
+the rubric of standing to invoke the court’s jurisdiction. Id.
+
+        {¶7}    Rather, where there is a question of whether an injured party may seek
+
+certain economic damages paid by the insurer, the proper consideration is whether
+
+the joinder rules have been satisfied as to the real party in interest. See id. at ¶ 27.
+
+Every action must be prosecuted in the name of the real party in interest. Civ.R. 17(A).
+
+However, “[n]o action shall be dismissed on the ground that it is not prosecuted in the
+
+
+2 Evidence was submitted at trial showing that, while Medicare was billed for medical expenses in
+the amount of $277,813.99, Medicare ultimately paid only $62,021.20 on Mr. Densler’s behalf.
+
+                                                   4
+                      OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+name of the real party in interest until a reasonable time has been allowed after
+
+objection for ratification of commencement of the action by, or joinder or substitution
+
+of, the real party in interest.” Id.
+
+       {¶8}    “ ‘The purpose behind the real party in interest rule is * * * to enable the
+
+defendant to avail himself of evidence and defenses that the defendant has against the
+
+real party in interest, and to assure him finality of the judgment, and that he will be
+
+protected against another suit brought by the real party at interest on the same
+
+matter.’ ” McCann at ¶ 21, quoting Setters v. Durrani, 2020-Ohio-6859, 164 N.E.3d
+
+1159, ¶ 54 (1st Dist.).
+
+       {¶9}    Here, Medicare possesses a statutory right of subrogation under 42
+
+U.S.C. 1395y(b)(2)(B)(iv), which provides, “The United States shall be subrogated (to
+
+the extent of payment made under this title [42 U.S.C. 1395 et seq.] for such an item
+
+or service) to any right under this subsection of an individual or other entity to
+
+payment with respect to such item or service under a primary plan.” See 42 C.F.R.
+
+411.26(a). Thus, no party disputes that Medicare was a real party in interest to the
+
+extent of the payments made on Mr. Densler’s behalf. Rather, the disputed issue is
+
+whether Medicare was the sole real party in interest as to Mr. Densler’s claim of past
+
+medical expenses.
+
+       {¶10} Defendants argue that Medicare paid the entire amount of Mr. Densler's
+
+medical expenses and therefore is the sole real party in interest as to those expenses.
+
+In support of this assertion, they cite to Shealy v. Campbell, 20 Ohio St.3d 23, 485
+
+N.E.2d 701 (1985). In Shealy, tortfeasor 1 filed suit against tortfeasor 2 asserting that
+
+each was jointly liable for damages to another, McClain, in tort and tortfeasor 1 had
+
+paid the entire amount of the judgment to McClain. Shealy at 23. Tortfeasor 1 sought
+
+contribution from tortfeasor 2 for his proportionate share of the common liability. Id.
+
+                                                5
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+Tortfeasor 2 challenged the action on the grounds that the action was not being
+
+prosecuted by the real party in interest as the insurance company which paid the full
+
+judgment was the sole real party in interest. Id. The Ohio Supreme Court ultimately
+
+held that the insurance company who paid the full judgment was the sole real party in
+
+interest. Id. at 24. The court defined a “real party in interest” as “ ‘one who has a real
+
+interest in the subject matter of the litigation, and not merely an interest in the action
+
+itself, i.e., one who is directly benefitted or injured by the outcome of the case.’ ”
+
+(Emphasis sic.) Id. The court then found, after looking to the substantive law creating
+
+the subrogation right of the insurance company, that the insurance company, as the
+
+party who paid the entire claim to McClain, was the party possessing a right to be
+
+enforced and the only party that would directly be benefited or be injured by the
+
+outcome of the suit. Id. at 25. The court found this holding to be “in accord with the
+
+general rule that a fully subrogated insurer is the real party in interest and must bring
+
+suit in its own name, for when the loss is fully paid by an insurer and the insurer
+
+becomes subrogated to the insured’s claim against the wrongdoer, the insured no
+
+longer has a right of action against the wrongdoer.” (Emphasis added.) Id.
+
+       {¶11} The difference between Shealy and the instant case is that the bounds
+
+of liability were firmly established in Shealy—as a judgment had already been
+
+entered—and therefore, when looking to the insurer’s subrogation right, it was clear
+
+that tortfeasor 1 had no interest to claim at the time the action was filed as the insurer
+
+had paid the entire amount of the loss. Here, the bounds of liability had yet to be
+
+established at the time this action was filed. Notably, Mr. Densler’s claim for past
+
+medical expenses was not limited to the amount ultimately accepted as payment from
+
+Medicare by his medical providers. Rather, he was entitled to present a claim to the
+
+jury for reasonable medical expenses up to the amount originally billed by his medical
+
+                                                6
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+providers as permitted in Robinson, 112 Ohio St.3d 17, 2006-Ohio-6362, 857 N.E.2d
+
+1195.
+
+        {¶12} Defendants point to no authority for the proposition that an insurer—
+
+who pays only the portion of the medical expenses ultimately accepted as payment by
+
+the health care provider—becomes the sole real party in interest as to a claim for past
+
+medical expenses, despite no specific statutory or contractual subrogation provision
+
+providing as such. Such a rule would cause a plaintiff to uniformly lose the ability to
+
+present a claim for reasonable medical expenses under Robinson.
+
+        {¶13} Rather, as recognized in Cleveland Paint & Color Co. v. Bauer Mfg. Co.,
+
+155 Ohio St. 17, 25, 97 N.E.2d 545 (1951), where an insurer has paid only part of a loss,
+
+both the insured and insurer have substantive rights against the tortfeasor, which
+
+qualify them as real parties in interest. Accord, e.g., Johnson v. Stachel, 2020-Ohio-
+
+3015, 154 N.E.3d 577, ¶ 62 (5th Dist.), citing Cleveland Paint at 24-25. (“If the insurer
+
+has paid only part of a claim, both the insurer and the insured have substantive rights
+
+against the tortfeasor which qualify them as real parties in interest.”). In other words,
+
+where an insurer pays only part of a loss, the insurer and the insured are parties united
+
+in interest and both must be joined in the action. Id.; Banford v. State Farm Ins. Co.,
+
+2d Dist. Montgomery No. 18464, 2001 Ohio App. LEXIS 2752, 16-17 (June 22,2001),
+
+citing Holibaugh v. Cox, 167 Ohio St. 340, 148 N.E.2d 677 (1958).
+
+        {¶14} Because Mr. Densler maintained an interest in his claim for past
+
+medical expenses at the time of trial, Medicare was not the sole real party in interest
+
+under Civ.R. 17 as to the claim for past medical expenses. Rather, Mr. Densler and
+
+Medicare were parties united in interest as to this claim. Beyond that, defendants do
+
+not present any challenge to the trial court’s joinder determination under Civ.R. 19.
+
+Therefore, we hold that the trial court did not err in allowing Mr. Densler to pursue a
+
+                                               7
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+claim for past medical expenses at trial. Accordingly, this portion of the assignment
+
+of error is overruled. However, for the reasons that follow, we nevertheless hold that
+
+a new trial is warranted in this case.
+
+          B. Admission of Improper Evidence Relied Upon by the Jury
+
+       {¶15} Defendants raise several issues for review relating to asserted
+
+evidentiary errors made by the trial court which warrant a new trial. Motions for a
+
+new trial are governed by Civ.R. 59, which provides, in relevant part, that a new trial
+
+may be granted upon any irregularity “in the proceedings of the court, jury, magistrate,
+
+or prevailing party, or any order of the court or magistrate, or abuse of discretion, by
+
+which an aggrieved party was prevented from having a fair trial.” Civ.R. 59(A)(1).
+
+“Upon a trial court’s denial of a motion for a new trial, ‘we “construe the evidence in a
+
+light favorable to the trial court’s action,” ’ while applying an abuse of discretion
+
+standard of review.” Stephenson v. Durrani, 1st Dist. Hamilton Nos. C-220020 and
+
+C-220036, 2023-Ohio-2500, ¶ 15, quoting Adams v. Durrani, 2022-Ohio-60, 183
+
+N.E.3d 560, ¶ 20 (1st Dist.). “ ‘An abuse of discretion connotes more than a mere error
+
+of judgment; rather, “it implies that the court’s attitude is arbitrary, unreasonable, or
+
+unconscionable.” ’ ” Id. at ¶ 16, quoting Hayes v. Durrani, 1st Dist. Hamilton No. C-
+
+190617, 2021-Ohio-725, ¶ 8. “An abuse of discretion occurs when ‘a court exercise[es]
+
+its judgment, in an unwarranted way, in regard to a matter over which it has
+
+discretionary authority.’ ” Id., quoting Johnson v. Abdullah, 166 Ohio St.3d 427, 2021-
+
+Ohio-3304, 187 N.E.3d 463, ¶ 35.
+
+       {¶16} Defendants first argue that the trial court abused its discretion by
+
+admitting the testimony of Dr. Zeeshan Tayeb as his testimony was inadmissible as
+
+habit evidence under Evid.R. 406. We review the evidentiary decisions of a trial court
+
+
+
+                                               8
+                         OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+for an abuse of discretion. Id. at ¶ 27, citing State v. White, 2015-Ohio-3512, 37 N.E.3d
+
+1271, ¶ 36 (2d Dist.).
+
+       {¶17} Dr. Tayeb—a physician who previously worked with Dr. Durrani at
+
+CAST—testified as follows:
+
+       Q:      Did you hear that Durrani – Dr. Durrani told her that she could
+
+               be paralyzed if she did not have this surgery? Was that
+
+               something that you routinely heard him tell patients?
+
+       A:      So, again, during the shadowing time, it is something that I did
+
+               hear here and there, but it was definitely from, again, working
+
+               with the patients that we shared. That was definitely a phrase
+
+               that was utilized.
+
+       Q:      And would Dr. Durrani ever classify surgery as an emergency?
+
+       A:      Yes, he did.
+
+       Q:      And when he would classify the surgery as an emergency, would
+
+               it actually be an emergency?
+
+       A:      Well, that’s a call for a surgeon to make, you know, making
+
+               statements like a patient’s head is going to fall off or they’re going
+
+               to be paralyzed, or, you know, you’re not going to be able to walk
+
+               again or you’re going to lose control of your bowel or bladder.
+
+               These are all, according to basic textbooks, that you have a
+
+               surgical emergency.
+
+               And a lot of those cases, you know, these individuals had been
+
+               living like this for so long, and, you know, all of a sudden now
+
+               they see Dr. Durrani and they’re being told, you know,
+
+               something.
+
+                                                 9
+           OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+     And so they were put into a lot of fear essentially. And even when
+
+     I would see these people afterwards, these unfortunate souls,
+
+     they would go on and tell me, like, I would have tried this or I
+
+     would have tried that, but I was essentially told that there was no
+
+     other way around this, that I have to go down this path or else
+
+     I’m going to suffer severely down the road.
+
+Q:   And when you reference patients’ heads falling off and paralyzed
+
+     and stuff like that, would the patients at CAST be told that by
+
+     somebody?
+
+A:   Yes. It was told by Dr. Durrani himself.
+
+Q:   And in your experience, how frequently did that happen?
+
+A:   Well, it happened a fair amount because I would hear this from
+
+     a number of patients. I mean, even to this day, I follow a couple.
+
+     I follow a few of these patients, and they still remember those
+
+     phrases being told to them, you know, about paralysis and/or
+
+     their heads falling off, and just some of the things we just
+
+     mentioned previously.
+
+                             ***
+
+Q:   Doctor, did Dr. Durrani ever coerce patients into having surgery?
+
+A:   When you tell a person that their head is going to fall off or
+
+     they’re going to be paralyzed or they’re not going to walk again
+
+     or they’re going to lose control of their bowel and bladder and
+
+     pooping and peeing on themselves, I think you’re basically
+
+     telling that person: you need to do this.
+
+                             ***
+
+                                     10
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+       Q:      And you personally—would you ever hear Dr. Durrani tell a
+
+               patient those things?
+
+       A:      I only shadowed him for the first couple weeks, so I was not in
+
+               the room when those exact statements were said. However,
+
+               having seen many of the patients during the workup for the
+
+               surgery or right before surgery or even after surgery, the ones
+
+               that – whether they were successful or not, when they would
+
+               come back and say this and I heard the same statements over and
+
+               over again, that led me to believe that, obviously, these
+
+               statements were being made.
+
+       {¶18} This court recently addressed substantially similar testimony to the
+
+testimony now before us in Stephenson, 1st Dist. Hamilton Nos. C-220020 and C-
+
+220036, 2023-Ohio-2500. We held that the trial court abused its discretion in
+
+admitting the testimony as habit evidence as a sufficient foundation was not
+
+established for the testimony to be admissible as habit evidence. Id. at ¶ 27-37. We
+
+reaffirm that position here and hold that the trial court abused its discretion in
+
+admitting Dr. Tayeb’s testimony for the same reasons provided in Stephenson.
+
+       {¶19} Nevertheless, “ ‘ “[a]n improper evidentiary ruling constitutes reversible
+
+error only when the error affects the substantial rights of the adverse party or the
+
+ruling is inconsistent with substantial justice.” ’ ” Id. at ¶ 78, quoting Setters, 2020-
+
+Ohio-6859, 164 N.E.3d 1159, at ¶ 22. “ ‘In determining whether substantial justice has
+
+been done, a reviewing court must weigh the prejudicial effect of the errors and
+
+determine whether the trier of fact would have reached the same conclusion had the
+
+errors not occurred.’ ” Id., citing Setters at ¶ 22.
+
+
+
+                                                11
+                        OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+        {¶20} Here, Dr. Tayeb’s testimony was the only testimony which established
+
+that Dr. Durrani told his patients that they would lose control of their bodily functions
+
+absent surgery. Mr. Densler’s testimony was limited to stating that Dr. Durrani told
+
+him he would be paralyzed without the surgery. Yet, the jury interrogatories reveal
+
+that the jury awarded Mr. Densler punitive damages after finding that Dr. Durrani
+
+“acted with malice and aggravated or egregious fraud” by telling Mr. Densler “that he
+
+would be paralyzed without the surgery and lose control of bodily functions.” Because
+
+the record provides clear confirmation that the jury relied on the improperly admitted
+
+testimony when making its decision in this case, we cannot say that the jury—as the
+
+fact finder—would have reached the same conclusion absent the admission of Dr.
+
+Tayeb’s testimony. Therefore, we hold that the defendants are entitled to a new trial
+
+and the trial court abused its discretion in finding otherwise.                   Accordingly, the
+
+assignment of error is sustained.
+
+        {¶21} Because we find that resolution of the first evidentiary issue presented
+
+for review is dispositive of this appeal, the remaining evidentiary and trial issues raised
+
+by the defendants are now moot and we decline to address them.3
+
+
+
+
+3 We note that one of the issues raised by defendants in this case was the trial court’s instruction to
+the jury regarding Dr. Durrani’s absence which allowed the jury to “make whatever inferences and
+conclusions” it found warranted from Dr. Durrani’s failure to attend the trial. This court has
+recently held that such an instruction was an abuse of discretion and that the cumulative effect of
+the jury instruction with other errors amounted to reversible error. See Hounchell v. Durrani, 1st
+Dist. Hamilton No. C-220021, 2023-Ohio-2501, ¶ 65-70, appeal not accepted, ___ Ohio St.3d
+____, 2023-Ohio-4410, ___ N.E.2d ___; Greene v. Durrani, 1st Dist. Hamilton Nos. C-220023
+and C-220037, 2023-Ohio-3069, ¶ 17-18; Stratman v. Durrani, 1st Dist. Hamilton Nos. C-220027
+and C-220032, 2023-Ohio-3035, ¶ 19-20. Here, based on our resolution, we need not determine
+whether the jury instruction on its own amounts to reversible error because this issue is mooted by
+our resolution of this case.
+
+                                                      12
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+                                    III. Conclusion
+
+       {¶22} For all the foregoing reasons, we sustain the sole assignment of error,
+
+reverse the trial court’s judgment, and remand the cause for a new trial on the
+
+fraudulent-misrepresentation claim consistent with this opinion and the law.
+
+                                              Judgment reversed and cause remanded.
+
+BOCK, J., concurs.
+BERGERON, J., concurs separately.
+
+BERGERON, J., concurring separately.
+
+       {¶23} I concur in the majority’s judgment reversing this cause for a new trial,
+
+but I write separately because I would reverse on the additional ground that the trial
+
+court abused its discretion by denying defense counsel an opportunity to cross-
+
+examine Mr. Densler about a prior inconsistent statement.
+
+       {¶24} At trial, Mr. Densler’s counsel asked him to explain his initial consult
+
+with Dr. Durrani: “Can you tell me what happened at that first visit?” In his response,
+
+he shared his recollections of first seeing Dr. Durrani, including this critical point:
+
+“[Dr. Durrani] told me that I would be paralyzed” if he did not have surgery on his
+
+back. That fact proved to be a crucial one for the jury, as noted in the majority opinion.
+
+       {¶25} But the trial court unfairly cut off cross-examination on this point that
+
+would have allowed defense counsel to test the accuracy of Mr. Densler’s recollection.
+
+After he repeated Dr. Durrani’s paralysis warning on cross-examination, defense
+
+counsel queried, “By the way, you never testified to that in your deposition at all, did
+
+you?” The trial court sustained an objection from Mr. Densler’s counsel and struck
+
+the question.    Based on my review of the record, this is inconsistent with the
+
+requirements and purpose of Evid.R. 613(B).
+
+
+
+
+                                               13
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+       {¶26} Evid.R. 613(B) allows a party to introduce extrinsic evidence, such as a
+
+deposition transcript, of a testifying witness’s prior inconsistent statement so long as
+
+proper foundation is laid and the witness receives an opportunity to explain the
+
+inconsistency. Evid.R. 613(B); Garry v. Borger, 1st Dist. Hamilton No. C-220069,
+
+2023-Ohio-905, ¶ 29. Looking at the above-quoted question and answer in a vacuum,
+
+it might not appear that such a foundation was laid. But as one flips a few pages earlier
+
+in the trial transcript, Dr. Durrani’s counsel laid the requisite foundation for
+
+introducing statements from the deposition, identifying the date and circumstances of
+
+the deposition and establishing that Mr. Densler remembered giving it and taking an
+
+oath to tell the truth. Defense counsel proceeded to ask several questions based on
+
+Mr. Densler’s deposition testimony, highlighting inconsistencies and at times reading
+
+questions and answers directly from the deposition transcript.          Apart from the
+
+question about the “paralyzed” comment and a couple of brief instances where the
+
+court limited the questioning, the trial court allowed most, if not all, of defense
+
+counsel’s impeachment efforts relying on the deposition transcript.
+
+       {¶27} It is unclear why the trial court refused the question at issue in light of
+
+the string of impeachment queries leading up to that point. Reading the transcript in
+
+context, there is no question that the purpose of asking Mr. Densler about omitting
+
+the “paralyzed” comment in his deposition was impeachment. The witness was on the
+
+stand and had the chance to explain or deny the omission. And his counsel had the
+
+opportunity to ask him about it on redirect examination, because he had not yet been
+
+dismissed. Further, defense counsel presented the witness with the prior statement
+
+by laying the foundation about the deposition and asking him multiple questions
+
+about it. Counsel also asked whether he made the statement and remembered giving
+
+it, which he did and confirmed. See Civ.R. 32(A)(1) (“Any deposition may be used by
+
+                                               14
+                       OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+any party for the purpose of contradicting or impeaching the testimony of deponent
+
+as a witness.”).
+
+       {¶28} I conclude there was an inconsistency between Mr. Densler’s trial
+
+testimony stating that Dr. Durrani told him he would be paralyzed without surgery
+
+and his deposition testimony in which he never recites such an admonition. During
+
+the deposition, counsel repeatedly probed about the contents of his conversations with
+
+Dr. Durrani prior to agreeing to the surgery:
+
+       Do you remember anything you discussed with him?
+
+       When you had that first visit with Dr. Durrani you went through with
+
+       him everything that had led up to that point and why you were coming
+
+       to see him; is that fair?
+
+       And what did he say about any kind of treatment plan or what did he
+
+       recommend?
+
+       [A]nd he said he had a long chat with you about what you were going to
+
+       do, about what he was recommending for you? * * * Do you remember
+
+       him talking about that with you?
+
+       He went over the benefits and risks of the surgery with you at that time;
+
+       is that fair?
+
+       {¶29} Mr. Densler at no point mentioned that Dr. Durrani told him he would
+
+be paralyzed without surgery, despite multiple opportunities to respond to these
+
+prompts about their presurgery consultations. By then recalling the “paralyzed”
+
+comment at trial nine years later, in response to an open-ended question about his
+
+first meeting with Dr. Durrani resembling questions asked at his deposition, Mr.
+
+Densler’s testimony was inconsistent within the meaning of Evid.R. 613(B). Blocking
+
+cross-examination about this inconsistency unfairly tips the scales here because it
+
+                                                15
+                     OHIO FIRST DISTRICT COURT OF APPEALS
+
+
+
+concerns a dramatic, highly prejudicial comment that appears to have influenced the
+
+jury to conclude that Dr. Durrani perpetrated a fraud. It was an abuse of discretion
+
+for the trial court to not allow defense counsel to interrogate him about it. The jury
+
+should have had the opportunity to sort through these disparate statements and
+
+evaluate credibility accordingly.
+
+       {¶30} In addition to the improper testimony by Dr. Tayeb and the jury
+
+instruction issue mentioned in the majority’s footnote, I would reverse on this ground
+
+as well.
+
+Please note:
+
+       The court has recorded its own entry this date.
+
+
+
+
+                                             16
