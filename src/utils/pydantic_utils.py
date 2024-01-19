@@ -4,7 +4,7 @@ import pandas as pd
 import json
 from docstring_parser import parse
 from functools import wraps
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, Field, create_model
 from typing import (
     Any,
     Dict,
@@ -16,6 +16,8 @@ from typing import (
 )
 
 from src.types import Document, DocMetaData
+from src.language_models.GPT import GPT
+from langchain.schema import HumanMessage, AIMessage, ChatMessage, BaseMessage, SystemMessage
 
 logger = logging.getLogger(__name__)
 
@@ -431,26 +433,33 @@ class OpenAISchema(BaseModel):
         }
 
     @classmethod
-    def from_response(cls, completion, throw_error=True):
+    def from_response(cls, completion, strict: bool=False):
         """Execute the function from the response of an openai chat completion
 
         Parameters:
             completion (openai.ChatCompletion): The response from an openai chat completion
-            throw_error (bool): Whether to throw an error if the function call is not detected
 
         Returns:
             cls (OpenAISchema): An instance of the class
         """
         message = completion.choices[0].message
 
-        if throw_error:
-            assert "function_call" in message, "No function call detected"
-            assert (
-                message["function_call"]["name"] == cls.openai_schema["name"]
-            ), "Function name does not match"
-
         function_call = message["function_call"]
-        arguments = json.loads(function_call["arguments"], strict=False)
+        arguments = json.loads(function_call["arguments"], strict=strict)
+        return cls(**arguments)
+    
+    @classmethod
+    def from_lc_response(cls, message: AIMessage, strict: bool=False):
+        """Execute the function from the response of an openai chat completion
+
+        Parameters:
+            completion (langchain.HumanMessage): The response from an openai chat completion
+
+        Returns:
+            cls (OpenAISchema): An instance of the class
+        """
+        function_call = message.additional_kwargs['function_call']
+        arguments = json.loads(function_call["arguments"], strict=strict)
         return cls(**arguments)
 
 
@@ -464,3 +473,94 @@ def openai_schema(cls) -> OpenAISchema:
             __base__=(cls, OpenAISchema),
         )
     )  # type: ignore
+    
+    
+class Validator(OpenAISchema):
+    """
+    Validate if an attribute is correct and if not,
+    return a new value with an error message
+    """
+
+    is_valid: bool = Field(
+        default=True,
+        description="Whether the attribute is valid based on the requirements",
+    )
+    reason: Optional[str] = Field(
+        default=None,
+        description="The error message if the attribute is not valid, otherwise None",
+    )
+    fixed_value: Optional[str] = Field(
+        default=None,
+        description="If the attribute is not valid, suggest a new value for the attribute",
+    )
+    
+def llm_validator(
+    statement: str,
+    allow_override: bool = False,
+    model: str = "gpt-3.5-turbo",
+    temperature: float = 0,
+):
+    """
+    Create a validator that uses the LLM to validate an attribute
+
+    ## Usage
+
+    ```python
+    from instructor import llm_validator
+    from pydantic import BaseModel, Field, field_validator
+
+    class User(BaseModel):
+        name: str = Annotated[str, llm_validator("The name must be a full name all lowercase")
+        age: int = Field(description="The age of the person")
+
+    try:
+        user = User(name="Jason Liu", age=20)
+    except ValidationError as e:
+        print(e)
+    ```
+
+    ```
+    1 validation error for User
+    name
+      The name is valid but not all lowercase (type=value_error.llm_validator)
+    ```
+
+    Note that there, the error message is written by the LLM, and the error type is `value_error.llm_validator`.
+
+    Parameters:
+        statement (str): The statement to validate
+        model (str): The LLM to use for validation (default: "gpt-3.5-turbo")
+        temperature (float): The temperature to use for the LLM (default: 0)
+    """
+
+    def llm(v):
+        llm_validator = GPT(            
+            model=model,
+            temperature=temperature
+            )
+        
+        messages = [SystemMessage(
+        content="You are a world class validation model. Capable to determine if the following value is valid for the statement, if it is not, explain why and suggest a new value."
+        )]
+        
+        user_message = HumanMessage(
+            content=f"Does `{v}` follow the rules: {statement}"
+        )
+        
+        messages.append(user_message)
+        
+        resp = llm_validator.cast(
+            messages=messages,
+            response_model=Validator,
+        )  # type: ignore
+
+        # If the response is  not valid, return the reason, this could be used in
+        # the future to generate a better response, via reasking mechanism.
+        assert resp.is_valid, resp.reason
+
+        if allow_override and not resp.is_valid and resp.fixed_value is not None:
+            # If the value is not valid, but we allow override, return the fixed value
+            return resp.fixed_value
+        return v
+
+    return llm
